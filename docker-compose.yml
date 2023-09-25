@@ -1,0 +1,53 @@
+version: '3.8'
+x-avamia: &avamia
+  build: .
+  depends_on:
+    - redis
+    - postgresql
+  volumes:
+    - .:/avamia
+  stdin_open: true
+  tty: true
+  networks:
+    - avamia_default
+  environment:
+    DB_HOST: postgresql
+    NODE_OPTIONS: --openssl-legacy-provider
+    NODE_ENV: development
+    REDIS_URL: redis://redis:6379
+
+services:
+  rails:
+    command: sh -c "bundle install && rm -rf tmp/pids && rails s -b 0.0.0.0"
+    ports:
+      - 3000:3000
+      - 3035:3035
+    container_name: avamia
+    <<: *avamia
+  redis:
+    image: redis:6.2
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - '~/.data/redis:/data'
+    networks:
+      - avamia_default
+  postgresql:
+    image: postgres:15.2
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - '.:/share'
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - 5432:5432
+    container_name: postgresql_avamia
+    restart: 'always'
+    networks:
+      - avamia_default
+
+networks:
+  avamia_default:
+    driver: bridge
+    name: avamia_default
