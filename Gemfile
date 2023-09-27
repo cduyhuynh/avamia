@@ -18,12 +18,6 @@ gem "puma", "~> 5.0"
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
 
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
-
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
-
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
@@ -40,6 +34,7 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'net-http'
 gem 'webpacker'
+gem "importmap-rails"
 
 # Use Sass to process CSS
 # gem "sassc-rails"

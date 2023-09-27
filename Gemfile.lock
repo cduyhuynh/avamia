@@ -90,6 +90,9 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    importmap-rails (1.2.1)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     io-console (0.6.0)
     irb (1.8.1)
       rdoc
@@ -186,15 +189,9 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stimulus-rails (1.2.2)
-      railties (>= 6.0.0)
     stringio (3.0.8)
     thor (1.2.2)
     timeout (0.4.0)
-    turbo-rails (1.4.0)
-      actionpack (>= 6.0.0)
-      activejob (>= 6.0.0)
-      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uri (0.12.2)
@@ -222,6 +219,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   debug
+  importmap-rails
   jbuilder
   jsbundling-rails
   net-http
@@ -230,8 +228,6 @@ DEPENDENCIES
   rails (~> 7.0.8)
   selenium-webdriver
   sprockets-rails
-  stimulus-rails
-  turbo-rails
   tzinfo-data
   web-console
   webpacker
