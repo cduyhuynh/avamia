@@ -22,8 +22,8 @@ class DataFetchingService
   end
 
   def time_from
-    latest_news = News.order(:published_at).first
-    latest_news.nil? ? '' : latest_news.published_at.strftime("%Y%m%dT%H%M")
+    latest_news = News.order(published_at: :desc).first
+    latest_news.nil? ? '' : (latest_news.published_at + 1.minute).strftime("%Y%m%dT%H%M")
   end
 
   def serialized_items items
