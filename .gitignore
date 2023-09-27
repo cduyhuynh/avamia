@@ -36,3 +36,9 @@
 /node_modules
 .DS_Store
 data/
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
