@@ -1,4 +1,11 @@
 class NewsService
+  def list current_page
+    offset = (current_page - 1)*limit
+    News.order(published_at: :desc).
+      offset(offset).
+      limit(limit)
+  end
+
   def store_items
     items = data_service.get_news
     items.sort_by! {|item| item[:published_at]}
@@ -17,5 +24,9 @@ class NewsService
   private
   def data_service
     @data_service ||= DataFetchingService.new
+  end
+
+  def limit
+    10
   end
 end
