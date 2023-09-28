@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Button, Typography, Card, Avatar, Tag } from 'antd';
 import axios from 'axios';
 
-const { Title } = Typography;
+const { Title, Text, Link } = Typography;
 const { Meta } = Card;
 
 const renderTopics = (topics) => {
@@ -10,9 +10,66 @@ const renderTopics = (topics) => {
     <>
     {topics.map((topic) => {
       return (
-        <Tag value={topic[0]} color="orange" key={topic[0]}>{topic[1]}</Tag>
+        <Tag color="geekblue" style={{'margin-right': '5px'}}>{topic[1]}</Tag>
       )
     })}
+    </>
+  )
+}
+
+const renderTickers = (tickers) => {
+  return (
+    <>
+    {tickers.map((ticker) => {
+      const color = tickerColor(ticker[1])
+      return (
+        <Tag value={ticker[0]} color={color} key={ticker[0]}>{ticker[0]}</Tag>
+      )
+    })}
+    </>
+  )
+}
+
+const tickerColor = (label) => {
+  switch (label) {
+    case 'Bearish':
+      return '#87d068'
+    case 'Somewhat-Bearish':
+      return 'green'
+    case 'Neutral':
+      return 'gold'
+    case 'Somewhat-Bullish':
+      return 'magenta'
+    case 'Bullish':
+      return 'red'
+  }
+}
+
+const renderTitle = (item) => {
+  return (
+    <>
+      <Row>
+        {renderTopics(item.topics)} 
+        <Text type="secondary" style={{'font-size': '12px'}}>{item.published_at}</Text>
+      </Row>
+      <a href={item.original_url} target="_blank" style={{'white-space': 'pre-wrap', 'color': 'black'}}>
+        <span style={{'font-size': '20px'}}>{item.title}</span>
+      </a>
+      <br/>
+    </>
+  )
+}
+
+const renderDescription = (item) => {
+  return (
+    <>
+      {item.summary} 
+      <br/>
+      <Row style={{float: 'right'}}>
+        <Col >
+          {renderTickers(item.tickers)}
+        </Col>
+      </Row>
     </>
   )
 }
@@ -46,15 +103,14 @@ export default function(){
       </Col>
     </Row>
     {items.map((item) => {
-      let topics = renderTopics(item.topics)
       return (
         <Row key={item.id}>
           <Col span={20} offset={2}>
             <Card>
               <Meta
                 avatar={<Avatar size={128} shape="square" src={item.image_url} key={item.id}/>}
-                title={<a href={item.original_url} target="_blank">{item.title} </a>}
-                description={<>{item.summary} {<br/>} {topics}</>}
+                title={renderTitle(item)}
+                description={renderDescription(item)}
               />
             </Card>
           </Col>
