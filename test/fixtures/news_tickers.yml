@@ -1,0 +1,6 @@
+one:
+  news_id: 1
+  ticker_id: 1
+  sentiment_label: Neutral
+  created_at: 20230928T033520
+  updated_at: 20230928T033520

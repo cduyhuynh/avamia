@@ -5,16 +5,6 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  title: First News
-  summary: Breaking news
-  original_url: example.com
-  image_url: nil
-  created_at: 20230928T151500
-  updated_at: 20230928T151500
-two:
-  title: Second News
-  summary: Incoming news
-  original_url: example.com
-  image_url: nil
-  created_at: 20230928T033520
-  updated_at: 20230928T033520
+  id: 1
+  code: blockchain
+  name: Blockchain
