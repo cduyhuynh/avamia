@@ -50,6 +50,7 @@ class NewsService
     data = []
     items.each do |item|
       tmp = item.as_json
+      tmp[:published_at] = item.published_at.strftime '%m/%d/%Y %H:%M'
       tmp[:topics] = item.topics.pluck(:code, :name)
       tmp[:tickers] = item.tickers.pluck(:symbol, :sentiment_label)
       data << tmp
