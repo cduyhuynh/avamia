@@ -13,8 +13,8 @@ class DataFetchingService
        http.request(req)
     }
     raise "Can not connect to data site" unless response.code.to_i == 200
-    reponse_body = JSON.parse(response.body)
-    reponse_body["feed"]
+    response_body = JSON.parse(response.body)
+    response_body["feed"]
   end
 
   def news_url tickers
@@ -36,6 +36,7 @@ class DataFetchingService
       tmp[:image_url] = item["banner_image"]
       tmp[:published_at] = DateTime.parse item["time_published"]
       tmp[:topics] = item["topics"]
+      tmp[:tickers] = item["ticker_sentiment"]
       data << tmp
     end
     data
