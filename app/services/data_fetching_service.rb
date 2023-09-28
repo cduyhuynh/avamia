@@ -1,7 +1,11 @@
 class DataFetchingService
   def get_news
-    tickers = ''
-    url = news_url tickers
+    url = news_url
+    serialized_items(get_data(url))
+  end
+
+  def get_news_by_tickers tickers
+    url = news_by_tickers_url tickers
     serialized_items(get_data(url))
   end
 
@@ -14,11 +18,16 @@ class DataFetchingService
     }
     raise "Can not connect to data site" unless response.code.to_i == 200
     response_body = JSON.parse(response.body)
+    raise response_body["Information"] if response_body["feed"].nil?
     response_body["feed"]
   end
 
-  def news_url tickers
-    base_url + "?function=NEWS_SENTIMENT&tickers=#{tickers}&apikey=#{api_key}&time_from=#{time_from}"
+  def news_url
+    base_url + "?function=NEWS_SENTIMENT&apikey=#{api_key}&time_from=#{time_from}"
+  end
+
+  def news_by_tickers_url tickers
+    base_url + "?function=NEWS_SENTIMENT&tickers=#{tickers}&apikey=#{api_key}"
   end
 
   def time_from
