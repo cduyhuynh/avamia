@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   namespace :react, defaults: { format: 'json' } do
     resources :news
   end
+  root "static#index"
 end
