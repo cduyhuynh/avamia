@@ -1,9 +1,11 @@
 class NewsService
   def list current_page
     offset = (current_page - 1)*limit
-    News.order(published_at: :desc).
-      offset(offset).
-      limit(limit)
+    items = News.preload(:topics).
+              order(published_at: :desc).
+              offset(offset).
+              limit(limit)
+    serialized_items items
   end
 
   def store_items
@@ -28,5 +30,15 @@ class NewsService
 
   def limit
     10
+  end
+
+  def serialized_items items
+    data = []
+    items.each do |item|
+      tmp = item.as_json
+      tmp[:topics] = item.topics.pluck(:code, :name)
+      data << tmp
+    end
+    data
   end
 end
