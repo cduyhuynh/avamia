@@ -10,39 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_28_145340) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_29_192707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "news", force: :cascade do |t|
-    t.string "title"
-    t.string "summary"
-    t.string "original_url"
-    t.string "image_url"
-    t.datetime "published_at", precision: nil
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "news_tickers", force: :cascade do |t|
-    t.bigint "news_id"
-    t.bigint "ticker_id"
-    t.string "sentiment_label"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["news_id"], name: "index_news_tickers_on_news_id"
-    t.index ["ticker_id"], name: "index_news_tickers_on_ticker_id"
-  end
-
-  create_table "news_topics", force: :cascade do |t|
-    t.bigint "news_id"
-    t.bigint "topic_id"
-    t.decimal "relevance_score", precision: 3, scale: 2
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["news_id"], name: "index_news_topics_on_news_id"
-    t.index ["topic_id"], name: "index_news_topics_on_topic_id"
-  end
 
   create_table "tickers", force: :cascade do |t|
     t.string "name"
