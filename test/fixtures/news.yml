@@ -9,6 +9,7 @@ one:
   summary: Breaking news
   original_url: example.com
   image_url: nil
+  published_at: 20230928T151500
   created_at: 20230928T151500
   updated_at: 20230928T151500
 two:
@@ -16,5 +17,6 @@ two:
   summary: Incoming news
   original_url: example.com
   image_url: nil
+  published_at: 20230928T033520
   created_at: 20230928T033520
   updated_at: 20230928T033520

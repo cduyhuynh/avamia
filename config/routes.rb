@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   namespace :react, defaults: { format: 'json' } do
     resource :news do
       get :index
-      get :search_by_tickers
+      get :search_by_tickers, as: "search_by_tickers"
     end
 
     resource :tickers do
-      get :search
+      get :search, as: "search"
     end
   end
   root "static#index"

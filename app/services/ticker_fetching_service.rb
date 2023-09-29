@@ -2,7 +2,7 @@ class TickerFetchingService < FetchingService
   def search keywords
     search_url = url + "&keywords=#{keywords}"
     tickers = fetch_data search_url
-    p tickers
+
     tickers["bestMatches"]
   end
 
