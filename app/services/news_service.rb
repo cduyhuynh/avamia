@@ -9,7 +9,9 @@ class NewsService
   end
 
   def list_by_tickers tickers
-    data_service.get_news_by_tickers tickers
+    items = data_service.get_news_by_tickers tickers
+    items.map{|item| item[:published_at] = item[:published_at].strftime '%m/%d/%Y %H:%M'}
+    items
   end
 
   def store_items
