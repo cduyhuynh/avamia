@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Row, Col, Typography, Select, Spin } from 'antd';
+import { Layout, Row, Col, Typography, Image, Select, Spin } from 'antd';
 import Search from './search';
 
 const { Header } = Layout;
@@ -11,7 +11,7 @@ export default function({setItems}){
       <Row>
         <Col span={8} offset={1}>
           <Link href="/">
-            <Title level={2}>Asset Avenue</Title>
+            <Image height={"75%"} preview={false} src="/logo.png"/>
           </Link>
         </Col>
         <Col span={6}></Col>
