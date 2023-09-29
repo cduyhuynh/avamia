@@ -1,6 +1,6 @@
 class React::NewsController < ApplicationController
   def index
-    items = service.list params[:page].to_i
+    items = service.list
     render json: { items: items }, status: :ok
   end
 

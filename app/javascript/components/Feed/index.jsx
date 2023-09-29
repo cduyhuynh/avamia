@@ -52,7 +52,7 @@ const renderTitle = (item) => {
         {renderTopics(item.topics)} 
         <Text type="secondary" style={{fontSize: '12px'}}>{item.published_at}</Text>
       </Row>
-      <a href={item.original_url} target="_blank" style={{whiteSpace: 'pre-wrap', color: 'black'}}>
+      <a href={item.url} target="_blank" style={{whiteSpace: 'pre-wrap', color: 'black'}}>
         <span style={{fontSize: '20px'}}>{item.title}</span>
       </a>
       <br/>
@@ -76,7 +76,7 @@ const renderDescription = (item) => {
 
 export default function({items, setItems}){
   useEffect(() => {
-    axios.get(`react/news`, { params: { page: 1 }}).
+    axios.get(`react/news`).
       then(res => {
         if(res.status == 200)
         {
@@ -101,7 +101,7 @@ export default function({items, setItems}){
           <Col span={20} offset={2}>
             <Card>
               <Meta
-                avatar={<Avatar size={128} shape="square" src={item.image_url} key={item.id}/>}
+                avatar={<Avatar size={128} shape="square" src={item.banner_image} key={item.id}/>}
                 title={renderTitle(item)}
                 description={renderDescription(item)}
               />
