@@ -4,6 +4,11 @@ class React::NewsController < ApplicationController
     render json: { items: items }, status: :ok
   end
 
+  def search_by_tickers
+    items = service.list_by_tickers params[:tickers]
+    render json: { items: items }, status: :ok
+  end
+
   private
   def service
     @service ||= NewsService.new

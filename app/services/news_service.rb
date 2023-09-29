@@ -8,6 +8,12 @@ class NewsService
     serialized_items items
   end
 
+  def list_by_tickers tickers
+    items = data_service.get_news_by_tickers tickers
+    items.map{|item| item[:published_at] = item[:published_at].strftime '%m/%d/%Y %H:%M'}
+    items
+  end
+
   def store_items
     items = data_service.get_news
     items.sort_by! {|item| item[:published_at]}
@@ -43,7 +49,7 @@ class NewsService
   end
 
   def limit
-    10
+    25
   end
 
   def serialized_items items
