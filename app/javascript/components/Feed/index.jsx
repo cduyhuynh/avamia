@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Button, Typography, Card, Avatar, Tag } from 'antd';
 import axios from 'axios';
 
-const { Title, Text, Link } = Typography;
+const { Text, Link } = Typography;
 const { Meta } = Card;
 
 const renderTopics = (topics) => {
