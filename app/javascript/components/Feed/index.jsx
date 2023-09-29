@@ -33,15 +33,15 @@ const renderTickers = (tickers) => {
 const tickerColor = (label) => {
   switch (label) {
     case 'Bearish':
-      return '#87d068'
+      return '#397524'
     case 'Somewhat-Bearish':
-      return 'green'
+      return '#87d068'
     case 'Neutral':
       return 'gold'
     case 'Somewhat-Bullish':
-      return 'magenta'
+      return '#DE6768'
     case 'Bullish':
-      return 'red'
+      return '#97040C'
   }
 }
 
@@ -90,6 +90,11 @@ export default function({items, setItems}){
 
   return(
     <>
+    {items.length == 0 && 
+      <Row>
+        <Col span={4} offset={10}>No related items</Col>
+      </Row>
+    }
     {items.map((item) => {
       return (
         <Row key={item.id}>
