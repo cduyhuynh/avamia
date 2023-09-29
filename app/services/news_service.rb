@@ -10,12 +10,12 @@ class NewsService
 
   def list_by_tickers tickers_param
     tickers = tickers_param.join(',')
-    items = data_service.get_news_by_tickers tickers
+    items = fetching_service.get_news_by_tickers tickers
     serialize_tickers_items items
   end
 
   def store_items
-    items = data_service.get_news
+    items = fetching_service.get_news
     items.sort_by! {|item| item[:published_at]}
     topic_name_hash = Topic.name_hash
     ticker_symbol_hash = Ticker.symbol_hash
@@ -44,8 +44,8 @@ class NewsService
   end
 
   private
-  def data_service
-    @data_service ||= DataFetchingService.new
+  def fetching_service
+    @fetching_service ||= NewsFetchingService.new
   end
 
   def limit
