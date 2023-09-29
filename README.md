@@ -10,8 +10,9 @@ Rails 7.0
 NodeJs 18.16.0
 Yarn 3.6
 ReactJs 18.2
-Ubuntu 20.04
 AntDesign 5.9
+Redis 5.0
+Ubuntu 20.04
 ```
 
 ## Installation & Configuration
@@ -65,3 +66,12 @@ http://localhost:3000
 ```
 rails test test/
 ```
+## Usage
+### How could app maintain quota limit?
+* Use Redis to store latest data and check if should fetch latest news (time gap is 5 minutes)
+* Use another api key for searching tickers
+### Why use database for storing data then replace it with Redis later?
+* Code for storing items to database is complicated.
+* Redis allow us to store and retrieve data faster than database
+### Why 5 minutes?
+* Statistically, 5 minute is proper time gap for news.
