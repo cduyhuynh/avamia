@@ -5,13 +5,13 @@ class NewsService
               order(published_at: :desc).
               offset(offset).
               limit(limit)
-    serialized_items items
+    serialize_items items
   end
 
-  def list_by_tickers tickers
+  def list_by_tickers tickers_param
+    tickers = tickers_param.join(',')
     items = data_service.get_news_by_tickers tickers
-    items.map{|item| item[:published_at] = item[:published_at].strftime '%m/%d/%Y %H:%M'}
-    items
+    serialize_tickers_items items
   end
 
   def store_items
@@ -52,7 +52,7 @@ class NewsService
     25
   end
 
-  def serialized_items items
+  def serialize_items items
     data = []
     items.each do |item|
       tmp = item.as_json
@@ -62,5 +62,14 @@ class NewsService
       data << tmp
     end
     data
+  end
+
+  def serialize_tickers_items items
+    topic_name_code_hash = Topic.pluck(:name, :code).to_h
+    items.each do |item|
+      item[:published_at] = item[:published_at].strftime '%m/%d/%Y %H:%M'
+      item[:topics] = item[:topics].map{|topic| [topic_name_code_hash[topic["topic"]], topic["topic"]]}
+      item[:tickers] = item[:tickers].nil? ? [] : item[:tickers].map{|ticker| [ticker["ticker"], ticker["ticker_sentiment_label"]]}
+    end
   end
 end
