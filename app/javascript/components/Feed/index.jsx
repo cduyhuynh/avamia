@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Button, Typography, Card, Avatar, Tag } from 'antd';
 import axios from 'axios';
 
@@ -10,7 +10,7 @@ const renderTopics = (topics) => {
     <>
     {topics.map((topic) => {
       return (
-        <Tag color="geekblue" style={{'margin-right': '5px'}}>{topic[1]}</Tag>
+        <Tag color="geekblue" key={topic[0]} style={{marginRight: '5px'}}>{topic[1]}</Tag>
       )
     })}
     </>
@@ -50,10 +50,10 @@ const renderTitle = (item) => {
     <>
       <Row>
         {renderTopics(item.topics)} 
-        <Text type="secondary" style={{'font-size': '12px'}}>{item.published_at}</Text>
+        <Text type="secondary" style={{fontSize: '12px'}}>{item.published_at}</Text>
       </Row>
-      <a href={item.original_url} target="_blank" style={{'white-space': 'pre-wrap', 'color': 'black'}}>
-        <span style={{'font-size': '20px'}}>{item.title}</span>
+      <a href={item.original_url} target="_blank" style={{whiteSpace: 'pre-wrap', color: 'black'}}>
+        <span style={{fontSize: '20px'}}>{item.title}</span>
       </a>
       <br/>
     </>
@@ -74,8 +74,7 @@ const renderDescription = (item) => {
   )
 }
 
-export default function(){
-  const [items, setItems] = useState([]);
+export default function({items, setItems}){
   useEffect(() => {
     axios.get(`react/news`, { params: { page: 1 }}).
       then(res => {
@@ -89,19 +88,8 @@ export default function(){
       })
   }, []);
 
-  const loadLatest = () => {
-    console.log('loadLatest')
-  }
-
   return(
     <>
-    <Row>
-      <Col span={4} offset={11}>
-        <br />
-        <Button type="link" onClick={loadLatest}>Load latest news</Button>
-        <br />
-      </Col>
-    </Row>
     {items.map((item) => {
       return (
         <Row key={item.id}>
