@@ -7,20 +7,23 @@ export default function({setItems}){
   const [options, setOptions] = useState([]);
   const [tickers, setTickers] = useState([]);
 
-  const searchTickers = () => {
-    setFetching(true)
-    get(`react/tickers/search`, { params: { term: term} }).
-      then(res => {
-        if(res.status == 200)
-        {
-          setOptions(res.data.tickers)
+  const searchTickers = (term) => {
+    if(term.length >= 3)
+    {
+      setFetching(true)
+      get(`react/tickers/search`, { params: { term: term} }).
+        then(res => {
+          if(res.status == 200)
+          {
+            setOptions(res.data.tickers)
+            setFetching(false)
+          }
+        })
+        .catch((error) => {
           setFetching(false)
-        }
+          console.log("error", error);
       })
-      .catch((error) => {
-        setFetching(false)
-        console.log("error", error);
-    })
+    }
   }
 
   const searchArticles = (e) => {
