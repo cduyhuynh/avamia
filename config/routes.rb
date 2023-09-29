@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       get :index
       get :search_by_tickers
     end
+
+    resource :tickers do
+      get :search
+    end
   end
   root "static#index"
 end
